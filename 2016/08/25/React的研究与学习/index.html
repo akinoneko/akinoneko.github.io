@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React的研究与学习 | akinoneko&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="React简介前言　　最近开始学习React，做点笔记给自己留下点印象。React使用组件化的思想进行设计，可以通过多个小组件的组合来完成一个独立模块的功能。使用虚拟DOM的概念，React在内存数据中操作组件的内容，并通过React diff算法更新改变了的DOM节点，由于React使用的虚拟DOM是内存数据，所以具有较高的性能。 组件化　　　　1. React的组件有如下几点特性：　　2. 可">
+<meta name="keywords" content="React.js,前端,虚拟DOM,组件化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React的研究与学习">
+<meta property="og:url" content="http://akinoneko.github.io/2016/08/25/React的研究与学习/index.html">
+<meta property="og:site_name" content="akinoneko's Blog">
+<meta property="og:description" content="React简介前言　　最近开始学习React，做点笔记给自己留下点印象。React使用组件化的思想进行设计，可以通过多个小组件的组合来完成一个独立模块的功能。使用虚拟DOM的概念，React在内存数据中操作组件的内容，并通过React diff算法更新改变了的DOM节点，由于React使用的虚拟DOM是内存数据，所以具有较高的性能。 组件化　　　　1. React的组件有如下几点特性：　　2. 可">
+<meta property="og:image" content="http://i.imgur.com/MtVxuIA.png">
+<meta property="og:image" content="http://i.imgur.com/aGHClm2.jpg">
+<meta property="og:updated_time" content="2016-08-25T08:54:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React的研究与学习">
+<meta name="twitter:description" content="React简介前言　　最近开始学习React，做点笔记给自己留下点印象。React使用组件化的思想进行设计，可以通过多个小组件的组合来完成一个独立模块的功能。使用虚拟DOM的概念，React在内存数据中操作组件的内容，并通过React diff算法更新改变了的DOM节点，由于React使用的虚拟DOM是内存数据，所以具有较高的性能。 组件化　　　　1. React的组件有如下几点特性：　　2. 可">
+<meta name="twitter:image" content="http://i.imgur.com/MtVxuIA.png">
+  
+    <link rel="alternative" href="/atom.xml" title="akinoneko&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+      <script>
+          var _hmt = _hmt || [];
+          (function() {
+              var hm = document.createElement("script");
+              hm.src = "//hm.baidu.com/hm.js?4f94885a248c5bbc9f0409244392e9e7";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+          })();
+      </script>
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">akinoneko</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">向着新大陆前进，Java攻城狮 吼吼吼！</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:zongjindulian@gmail.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/akinoneko" title="GitHub"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="https://www.zhihu.com/people/neko-sakura" title="知乎"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=116786400" title="网易云音乐"></a></li>
+                            
+                                <li id="Twitter"><a class="Twitter" target="_blank" href="https://twitter.com/zongjindulian" title="Twitter"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/React-js/" style="font-size: 10px;">React.js</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/组件化/" style="font-size: 10px;">组件化</a> <a href="/tags/虚拟DOM/" style="font-size: 10px;">虚拟DOM</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">为了美好的未来~努力吧少年</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">akinoneko</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">akinoneko</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">向着新大陆前进，Java攻城狮 吼吼吼！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:zongjindulian@gmail.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/akinoneko" title="GitHub"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="https://www.zhihu.com/people/neko-sakura" title="知乎"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=116786400" title="网易云音乐"></a></li>
+                            
+                                <li id="Twitter"><a class="Twitter" target="_blank" href="https://twitter.com/zongjindulian" title="Twitter"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-React的研究与学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/25/React的研究与学习/" class="article-date">
+      <time datetime="2016-08-25T08:41:36.000Z" itemprop="datePublished">2016-08-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React的研究与学习
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术学习/">技术学习</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组件化/">组件化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/虚拟DOM/">虚拟DOM</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="React简介"><a href="#React简介" class="headerlink" title="React简介"></a>React简介</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>　　最近开始学习React，做点笔记给自己留下点印象。React使用组件化的思想进行设计，可以通过多个小组件的组合来完成一个独立模块的功能。使用虚拟DOM的概念，React在内存数据中操作组件的内容，并通过React diff算法更新改变了的DOM节点，由于React使用的虚拟DOM是内存数据，所以具有较高的性能。</p>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><p>　　<img src="http://i.imgur.com/MtVxuIA.png" alt=""><br>　　1. React的组件有如下几点特性：<br>　　2. 可组合性：组件之间可以嵌套使用。<br>　　2. 可重用性：每个组件可具有独立的功能，可以在多个UI场景中进行使用。<br>　　3. 可维护性：每个组件仅含有自身的逻辑，可以方便得进行维护。</p>
+<h3 id="JSX语法"><a href="#JSX语法" class="headerlink" title="JSX语法"></a>JSX语法</h3><p>　　JSX允许HTML语言可以脱离引号直接出现在Javascript语言中。具体的代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 引入需要的库文件3个 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/react.js"</span> &gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/react-dom.js"</span> &gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/browser.min.js"</span> &gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>React Demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="xml"></span></div><div class="line">		var Helloworld = React.createClass(&#123;</div><div class="line">			render:function()&#123;</div><div class="line">				return(</div><div class="line">					<span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">					<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">				);</div><div class="line">			&#125;</div><div class="line">		&#125;);		</div><div class="line">		React.render(</div><div class="line">			<span class="tag">&lt;<span class="name">Helloworld</span> /&gt;</span>,</div><div class="line">			document.getElementById('demo')</div><div class="line">		);</div><div class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span>	</div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="React-js组件学习"><a href="#React-js组件学习" class="headerlink" title="React.js组件学习"></a>React.js组件学习</h2><h3 id="组件属性"><a href="#组件属性" class="headerlink" title="组件属性"></a>组件属性</h3><p>　　React允许我们对普通的HTML代码进行包装，行程一个新的组件，组件可以具有一定的属性，在网页上可以和插入HTML标签一样在页面中插入组件。在React中通过React.creatClass方法来创建一个新的组件。以下是一个运用组件属性的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Comment = React.createClass(&#123;</div><div class="line">	<span class="attr">render</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> (</div><div class="line">			<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">				<span class="tag">&lt;<span class="name">h2</span>&gt;</span></div><div class="line">					&#123;this.props.author&#125;</div><div class="line">				<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">				&#123;this.props.children&#125;</div><div class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		);</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line">ReactDOM.render(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">Comment</span> <span class="attr">author</span>=<span class="string">'akinoneko'</span>&gt;</span>这是一个Comment<span class="tag">&lt;/<span class="name">Comment</span>&gt;</span></span>,</div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>　　通过props，可以获取组件的属性值，使用方式是通过<strong>this.props.属性名</strong>来取得对应属性的值。<br>　　在创建组件时需要注意以下几点：<br>　　1. 组件的名称必须<strong>首字母大写</strong>；<br>　　2. 组件中的元素需要添加CSS时，<strong>使用clssName不能使用class</strong>，因为class是js中的关键字；<br>　　3. 组件中的元素不能直接使用style设置inline CSS的属性，    需要使用<strong>style={ {属性名:属性值} }</strong>这种方式；</p>
+<h3 id="组件状态"><a href="#组件状态" class="headerlink" title="组件状态"></a>组件状态</h3><p>　　React中的组件都有自己的状态，当与用户进行交互的时候，组件的状态发生了改变，React会捕捉到组件的变化，并且与DOM进行对比，使用修改最少UI资源的方式更新UI界面。以下是一个示例的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Text = React.createClass(&#123;</div><div class="line">	<span class="attr">getInitialState</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> &#123;<span class="attr">textvalue</span>:<span class="string">""</span>&#125;;</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">handleChange</span>:<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="keyword">this</span>.setState(&#123;<span class="attr">textvalue</span>:e.target.value&#125;);</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">render</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> (</div><div class="line">			&lt;div&gt;</div><div class="line">				&lt;h2&gt;文本输入&lt;/h2&gt;</div><div class="line">				&lt;input type="text" onChange=&#123;this.handleChange&#125; /&gt;</div><div class="line">				&lt;h3&gt;&#123;this.state.textvalue&#125;&lt;/h3&gt;</div><div class="line">			&lt;/div&gt;</div><div class="line">		);</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line">ReactDOM.render(</div><div class="line">  &lt;Text author='Yoo酱'/&gt;,</div><div class="line">  document.getElementById('demo')</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>　　在上述的代码中，我们使用了一个getInitialState方法，该方法在组件初始化的时候会被执行，且必须返回一个NULL或者一个对象。另外我们通过将handleChange事件与输入框绑定来调用setState方法修改this.state.textvalue的值，每次改完后，会自动调用this.render方法，重新渲染组件。</p>
+<h3 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h3><p>　　组件的生命周期分为三个阶段Mounting、Updating和Unmounting，React 为每个状态都提供了两种处理函数，will 函数在进入状态之前调用，did 函数在进入状态之后调用，三种状态共计五种处理函数。</p>
+<ul>
+<li>componentWillMount()</li>
+<li>componentDidMount()</li>
+<li>componentWillUpdate(object nextProps, object nextState)</li>
+<li>componentDidUpdate(object prevProps, object prevState)</li>
+<li>componentWillUnmount()</li>
+</ul>
+<h3 id="组件嵌套"><a href="#组件嵌套" class="headerlink" title="组件嵌套"></a>组件嵌套</h3><p>　　React的组件可以进行复用，多个组件可以进行嵌套行程一个独立的模块。<br><img src="http://i.imgur.com/aGHClm2.jpg" alt="TODO-APP"><br>　　这是一个利用组件嵌套制作的TODO-APP，代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//List列表</span></div><div class="line"><span class="keyword">var</span> TodoList = React.createClass(&#123;</div><div class="line">	<span class="attr">handleClick</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"son click"</span>);</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">render</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> createItem = <span class="function"><span class="keyword">function</span>(<span class="params">nextItem</span>)</span>&#123;</div><div class="line">				<span class="keyword">return</span> (</div><div class="line">					<span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;nextItem&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></div><div class="line">				)</div><div class="line">			&#125;</div><div class="line">		<span class="comment">//遍历输出列表数组中的值</span></div><div class="line">		<span class="keyword">return</span> (</div><div class="line">			<span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span>&#123;this.props.items.map(createItem)&#125;<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></div><div class="line">		);</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line"><span class="comment">//Todo组件</span></div><div class="line"><span class="keyword">var</span> TodoApp = React.createClass(&#123;</div><div class="line">	<span class="attr">getInitialState</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> &#123;<span class="attr">items</span>: [],<span class="attr">text</span>: <span class="string">''</span>&#125;;</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">handleSubmit</span>:<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">		<span class="comment">//阻止表单提交</span></div><div class="line">		event.preventDefault();</div><div class="line">		<span class="keyword">var</span> nextText = <span class="keyword">this</span>.state.text;</div><div class="line">		<span class="comment">//防止空数据提交</span></div><div class="line">		<span class="keyword">if</span>(nextText==<span class="string">''</span>)&#123;</div><div class="line">			<span class="keyword">return</span> ;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//添加内容到列表数组中</span></div><div class="line">		<span class="keyword">var</span> nextItems = <span class="keyword">this</span>.state.items.concat([nextText]);</div><div class="line">		nextText = <span class="string">''</span>;</div><div class="line">		<span class="keyword">this</span>.setState(&#123;<span class="attr">items</span>:nextItems,<span class="attr">text</span>:nextText&#125;);</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">handleOnChange</span>:<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">		<span class="keyword">this</span>.setState(&#123;<span class="attr">text</span>: event.target.value&#125;);</div><div class="line">	&#125;,</div><div class="line">	<span class="attr">render</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> (</div><div class="line">			&lt;div&gt;</div><div class="line">				&lt;h2 style=&#123;&#123;color:'red'&#125;&#125;&gt;待办事项&lt;/h2&gt;</div><div class="line">				&lt;TodoList items=&#123;this.state.items&#125; /&gt;</div><div class="line">				&lt;form onSubmit=&#123;this.handleSubmit&#125;&gt;</div><div class="line">					&lt;input type="text" value=&#123;this.state.text&#125; onChange=&#123;this.handleOnChange&#125; /&gt;</div><div class="line">					&lt;button&gt;&#123;'添加事项' + (this.state.items.length+1)&#125;&lt;/button&gt;</div><div class="line">				&lt;/form&gt;</div><div class="line">			&lt;/div&gt;</div><div class="line">		);</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line">ReactDOM.render(</div><div class="line">  &lt;TodoApp /&gt;,</div><div class="line">  document.getElementById('demo')</div><div class="line">);</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/08/25/React的研究与学习/">React的研究与学习</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 akinoneko 的个人博客">akinoneko</a></p>
+        <p><span>发布时间:</span>2016年08月25日 - 16时41分</p>
+        <p><span>最后更新:</span>2016年08月25日 - 16时54分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/25/React的研究与学习/" title="React的研究与学习">http://akinoneko.github.io/2016/08/25/React的研究与学习/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://akinoneko.github.io/2016/08/25/React的研究与学习/　　作者: akinoneko" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/03/05/我的第一个博客/">
+                    我的第一个博客
+                </a>
+            </div>
+        
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React简介"><span class="toc-number">1.</span> <span class="toc-text">React简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件化"><span class="toc-number">1.2.</span> <span class="toc-text">组件化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSX语法"><span class="toc-number">1.3.</span> <span class="toc-text">JSX语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-js组件学习"><span class="toc-number">2.</span> <span class="toc-text">React.js组件学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#组件属性"><span class="toc-number">2.1.</span> <span class="toc-text">组件属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件状态"><span class="toc-number">2.2.</span> <span class="toc-text">组件状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件生命周期"><span class="toc-number">2.3.</span> <span class="toc-text">组件生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件嵌套"><span class="toc-number">2.4.</span> <span class="toc-text">组件嵌套</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/08/25/React的研究与学习/" data-title="React的研究与学习" data-url="http://akinoneko.github.io/2016/08/25/React的研究与学习/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"akinoneko"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//akinoneko.github.io/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/03/05/我的第一个博客/" title="上一篇: 我的第一个博客">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/React的研究与学习/">React的研究与学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/我的第一个博客/">我的第一个博客</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 akinoneko
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
